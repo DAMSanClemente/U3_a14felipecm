@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">U3_a14felipecm</string>
+    <string name="action_settings">Settings</string>
+    <string name="hint_texto">Escribe aquí algún texto</string>
+    <string name="hint_telefono">Número de teléfono</string>
+    <string name="boton_dtb">DATOS/TELÉFONO/BUSCADOR</string>
+    <string name="boton_datos">DATOS</string>
+    <string name="boton_cerrar">Cerrar</string>
+    <string name="string_default_busqueda">casa</string>
+    <string name="toast_aviso">No se ha introducido ningún texto para buscar</string>
+    <string name="title_activity_secundaria">Secundaria</string>
+
+    <string name="hello_world">Hello world!</string>
+</resources>
