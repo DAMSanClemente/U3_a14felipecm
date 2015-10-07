@@ -25,23 +25,23 @@ public class Principal extends Activity {
     AlertDialog.Builder dialogo;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
         //Listener para el boton datos, que muestra un toast
-        boton_toast = (Button) findViewById(R.id.boton_data);
-        boton_toast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        //boton_toast = (Button) findViewById(R.id.boton_data);
+        //boton_toast.setOnClickListener(new View.OnClickListener() {
+           // @Override
+          //  public void onClick(View v) {
                 if (savedInstanceState != null) {
                     Toast.makeText(Principal.this, savedInstanceState.getString("TELEFONO"), Toast.LENGTH_SHORT).show();
                     Toast.makeText(Principal.this, savedInstanceState.getString("TEXTO"), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(Principal.this, "No hay nada", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+            //}
+        //});
 
         //Listener para la pulsacion larga del boton
         Button boton = (Button) findViewById(R.id.boton_dtb);
@@ -119,10 +119,13 @@ public class Principal extends Activity {
                     //estado.putString("TELEFONO", data.getExtras().getString("TELEFONO"));
                     //Toast.makeText(Principal.this, data.getExtras().getString("TELEFONO"), Toast.LENGTH_SHORT).show();
                     //this.onRestoreInstanceState(estado);
-
                     this.onRestoreInstanceState(estado);
-                    this.onSaveInstanceState(estado);
+                    //this.onSaveInstanceState(estado);
+                    //this.onCreate(estado);
                     this.onCreate(estado);
+                    estado.putString("TEXTO", data.getExtras().getString("TEXTO"));
+                    estado.putString("TELEFONO", data.getExtras().getString("TELEFONO"));
+
                 }else{
                     Toast.makeText(Principal.this, "No hay nada", Toast.LENGTH_SHORT).show();
                 }
@@ -152,19 +155,19 @@ public class Principal extends Activity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
-
-        Toast.makeText(Principal.this, savedInstanceState.getString("TELEFONO")+"restoreinstace", Toast.LENGTH_SHORT).show();
+        String telefone = savedInstanceState.getString("TELEFONO");
+        Toast.makeText(Principal.this, telefone+"restoreinstace", Toast.LENGTH_SHORT).show();
 
 /*        savedInstanceState.putString("TELEFONO", savedInstanceState.getString("TELEFONO"));
         savedInstanceState.putString("TEXTO", savedInstanceState.getString("TEXTO"));*/
     }
 
-    @Override
-    protected void onPause() {
+    /*@Override
+    protected void onPause(Bundle savedState) {
         super.onPause();
 
         Toast.makeText(this, "Execútase: onPause. Aproveitar para gardar información por se se destrúe", Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
 
     @Override
