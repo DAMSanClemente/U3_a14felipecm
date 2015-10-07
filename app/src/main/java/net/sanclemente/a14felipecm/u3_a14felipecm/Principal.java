@@ -3,6 +3,7 @@ package net.sanclemente.a14felipecm.u3_a14felipecm;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.SearchManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -81,7 +82,8 @@ public class Principal extends Activity {
                 if(estado !=null){
                     terminoBuscar=estado.getString("TEXTO");
                 }
-                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH, Uri.parse(terminoBuscar));
+                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+                intent.putExtra(SearchManager.QUERY, terminoBuscar);
                 startActivity(intent);
                 //Toast.makeText(Principal.this, "Buscar", Toast.LENGTH_SHORT).show();
             }
@@ -95,6 +97,8 @@ public class Principal extends Activity {
                     startActivity(intent);
                     //Toast.makeText(Principal.this, "Llamamos por telefono a: "+estado.getString("TELEFONO"), Toast.LENGTH_SHORT).show();
                 }else{
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:981555666"));
+                    startActivity(intent);
                     Toast.makeText(Principal.this, getResources().getString(R.string.toast_aviso), Toast.LENGTH_SHORT).show();
                 }
 
@@ -106,6 +110,7 @@ public class Principal extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == COD_PETICION_SECUNDARIA){
             if (resultCode == RESULT_OK) {
                 if(data.hasExtra("TELEFONO")) {
@@ -135,9 +140,10 @@ public class Principal extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle estado) {
         //estado.putString("TELEFONO", et.getText().toString());
+
+        super.onSaveInstanceState(estado);
         estado.putString("TELEFONO", estado.getString("TELEFONO"));
         estado.putString("TEXTO", estado.getString("TEXTO"));
-        super.onSaveInstanceState(estado);
         Toast.makeText(Principal.this, estado.getString("TELEFONO")+"saveinstance",Toast.LENGTH_SHORT).show();
 
         //Toast.makeText(this, "Gardado estado: "+et.getText(), Toast.LENGTH_SHORT).show();
@@ -146,7 +152,9 @@ public class Principal extends Activity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
+
         Toast.makeText(Principal.this, savedInstanceState.getString("TELEFONO")+"restoreinstace", Toast.LENGTH_SHORT).show();
+
 /*        savedInstanceState.putString("TELEFONO", savedInstanceState.getString("TELEFONO"));
         savedInstanceState.putString("TEXTO", savedInstanceState.getString("TEXTO"));*/
     }
