@@ -10,8 +10,8 @@
     <string name="toast_aviso">No se ha introducido ningún texto para buscar</string>
     <string name="title_activity_secundaria">Secundaria</string>
     <string name="alert_dialog_titulo">Elige una acción</string>
-    <string name="alert_dialog_texto1">Texto a buscar</string>
-    <string name="alert_dialog_texto2">Número de teléfono</string>
+    <string name="alert_dialog_texto">Texto</string>
+    <string name="alert_dialog_texto_telefono">Número de teléfono</string>
     <string name="alert_boton_buscar">Buscar</string>
     <string name="alert_boton_llamar">Llamar</string>
 

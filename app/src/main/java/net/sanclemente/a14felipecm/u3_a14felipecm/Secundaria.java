@@ -22,6 +22,13 @@ public class Secundaria extends Activity {
         textoBusqueda = (EditText) findViewById(R.id.edit_texto);
     }
 
+    /*
+    *Boton de cerrar el activity
+    * Volvemos a la actividad principal devolviendo como parametros el:
+     * COD_PETICION_SECUNDARIA: que por defecto ya lo devuelve el setresult
+     * Result_ok para confirmar q está todo corercto
+     * un Intent con los datos de los edittext
+     */
     public void cerrarSecundaria(View v){
         EditText textoTelefono = (EditText) findViewById(R.id.edit_telefono);
         Intent intent = new Intent();
