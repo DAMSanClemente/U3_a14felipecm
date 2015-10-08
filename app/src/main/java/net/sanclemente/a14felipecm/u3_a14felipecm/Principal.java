@@ -23,8 +23,8 @@ public class Principal extends Activity {
 
     private static final int COD_PETICION_SECUNDARIA = 200;
     private static final int DIALOGO_ACCION = 1;
-    private TextView tv_oculto_buscar = (TextView) findViewById(R.id.textv_texto_buscar_invisible);
-    private TextView tv_oculto_telefono = (TextView) findViewById(R.id.textv_telefono_oculto);
+    private TextView tv_oculto_buscar;// = (TextView) findViewById(R.id.textv_texto_buscar_invisible);
+    private TextView tv_oculto_telefono;// = (TextView) findViewById(R.id.textv_telefono_oculto);
     //Variable para crear los dialogs
     AlertDialog.Builder dialogo;
 
@@ -33,17 +33,20 @@ public class Principal extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+
+        tv_oculto_buscar = (TextView) findViewById(R.id.textv_texto_buscar_invisible);
+        tv_oculto_telefono = (TextView) findViewById(R.id.textv_telefono_oculto);
         //Listener para el boton datos, que muestra un toast
         //boton_toast = (Button) findViewById(R.id.boton_data);
         //boton_toast.setOnClickListener(new View.OnClickListener() {
             //@Override
             //public void onClick(View v) {
-                if (savedInstanceState != null) {
+/*                if (savedInstanceState != null) {
                     Toast.makeText(Principal.this, savedInstanceState.getString("TELEFONO"), Toast.LENGTH_SHORT).show();
                     Toast.makeText(Principal.this, savedInstanceState.getString("TEXTO"), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(Principal.this, "No hay nada", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             //}
         //});
 
@@ -65,11 +68,11 @@ public class Principal extends Activity {
         startActivityForResult(intent, COD_PETICION_SECUNDARIA);
     }
 
-    /*public void mostrarToastStrings(View v){
-        Bundle extras=getIntent().getExtras();
+    public void mostrarToastStrings(View v){
+        //Bundle extras=getIntent().getExtras();
         //savedInstanceState.get()
-        Toast.makeText(Principal.this, extras.getString("TELEFONO").toString(), Toast.LENGTH_SHORT).show();
-    }*/
+        Toast.makeText(Principal.this, tv_oculto_buscar.getText().toString() + tv_oculto_telefono.getText().toString(), Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected Dialog onCreateDialog(int id){
@@ -81,10 +84,10 @@ public class Principal extends Activity {
         dialogo.setPositiveButton(getResources().getString(R.string.alert_boton_buscar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Bundle estado = getIntent().getExtras();
+                //Bundle estado = getIntent().getExtras();
                 String terminoBuscar= getResources().getString(R.string.string_default_busqueda);
-                if(estado !=null){
-                    terminoBuscar=estado.getString("TEXTO");
+                if(tv_oculto_buscar !=null){
+                    terminoBuscar=tv_oculto_buscar.getText().toString();
                 }
                 Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
                 intent.putExtra(SearchManager.QUERY, terminoBuscar);
@@ -96,8 +99,8 @@ public class Principal extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Bundle estado = getIntent().getExtras();
-                if(estado != null){
-                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(estado.getString("TELEFONO")));
+                if(tv_oculto_telefono.getText() != ""){
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+tv_oculto_telefono.getText().toString()));
                     startActivity(intent);
                     //Toast.makeText(Principal.this, "Llamamos por telefono a: "+estado.getString("TELEFONO"), Toast.LENGTH_SHORT).show();
                 }else{
@@ -123,12 +126,16 @@ public class Principal extends Activity {
                     //estado.putString("TELEFONO", data.getExtras().getString("TELEFONO"));
                     //Toast.makeText(Principal.this, data.getExtras().getString("TELEFONO"), Toast.LENGTH_SHORT).show();
                     //this.onRestoreInstanceState(estado);
-                    this.onRestoreInstanceState(estado);
+                    //this.onRestoreInstanceState(estado);
                     //this.onSaveInstanceState(estado);
                     //this.onCreate(estado);
-                    this.onCreate(estado);
-                    estado.putString("TEXTO", data.getExtras().getString("TEXTO"));
-                    estado.putString("TELEFONO", data.getExtras().getString("TELEFONO"));
+                    //this.onCreate(estado);
+                    tv_oculto_buscar.setText(estado.getString("TEXTO"));
+                    tv_oculto_telefono.setText(estado.getString("TELEFONO"));
+                    //estado.putString("TEXTO", data.getExtras().getString("TEXTO"));
+                    //estado.putString("TELEFONO", data.getExtras().getString("TELEFONO"));
+                    //this.onSaveInstanceState(estado);
+                    //this.onRestoreInstanceState(estado);
 
                 }else{
                     Toast.makeText(Principal.this, "No hay nada", Toast.LENGTH_SHORT).show();
@@ -147,12 +154,10 @@ public class Principal extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle estado) {
         //estado.putString("TELEFONO", et.getText().toString());
-
         super.onSaveInstanceState(estado);
         estado.putString("TELEFONO", tv_oculto_telefono.getText().toString());
         estado.putString("TEXTO", tv_oculto_buscar.getText().toString());
         Toast.makeText(Principal.this, estado.getString("TELEFONO")+"saveinstance",Toast.LENGTH_SHORT).show();
-
         //Toast.makeText(this, "Gardado estado: "+et.getText(), Toast.LENGTH_SHORT).show();
     }
 
@@ -160,7 +165,8 @@ public class Principal extends Activity {
     protected void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
         //String telefone = savedInstanceState.getString("TELEFONO");
-        tv_oculto_buscar.setText(savedInstanceState.getString("TELEFONO"));
+        tv_oculto_buscar.setText(savedInstanceState.getString("TEXTO"));
+        tv_oculto_telefono.setText(savedInstanceState.getString("TELEFONO"));
         //Toast.makeText(Principal.this, telefone+"restoreinstace", Toast.LENGTH_SHORT).show();
 
 /*        savedInstanceState.putString("TELEFONO", savedInstanceState.getString("TELEFONO"));

@@ -24,18 +24,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/boton_datos"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:onClick="mostrarToastStrings"/>
 
         <TextView
             android:id="@+id/textv_telefono_oculto"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            />
         <TextView
             android:id="@+id/textv_texto_buscar_invisible"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            />
 
 
 
