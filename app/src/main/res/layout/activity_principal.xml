@@ -26,6 +26,16 @@
             android:text="@string/boton_datos"
             android:layout_gravity="center"/>
 
+        <TextView
+            android:id="@+id/textv_telefono_oculto"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"/>
+        <TextView
+            android:id="@+id/textv_texto_buscar_invisible"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"/>
 
 
 

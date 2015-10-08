@@ -12,7 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class Principal extends Activity {
 
@@ -20,7 +23,8 @@ public class Principal extends Activity {
 
     private static final int COD_PETICION_SECUNDARIA = 200;
     private static final int DIALOGO_ACCION = 1;
-
+    private TextView tv_oculto_buscar = (TextView) findViewById(R.id.textv_texto_buscar_invisible);
+    private TextView tv_oculto_telefono = (TextView) findViewById(R.id.textv_telefono_oculto);
     //Variable para crear los dialogs
     AlertDialog.Builder dialogo;
 
@@ -32,8 +36,8 @@ public class Principal extends Activity {
         //Listener para el boton datos, que muestra un toast
         //boton_toast = (Button) findViewById(R.id.boton_data);
         //boton_toast.setOnClickListener(new View.OnClickListener() {
-           // @Override
-          //  public void onClick(View v) {
+            //@Override
+            //public void onClick(View v) {
                 if (savedInstanceState != null) {
                     Toast.makeText(Principal.this, savedInstanceState.getString("TELEFONO"), Toast.LENGTH_SHORT).show();
                     Toast.makeText(Principal.this, savedInstanceState.getString("TEXTO"), Toast.LENGTH_SHORT).show();
@@ -132,8 +136,8 @@ public class Principal extends Activity {
             }
         }
     }
-/*    @Override
-    protected void onRestart() {
+/*    //@Override
+    protected void onStart(Bundle) {
         super.onRestart();  // Always call the superclass method first
         Toast.makeText(Principal.this, "On restart", Toast.LENGTH_SHORT).show();
         // Activity being restarted from stopped state
@@ -145,8 +149,8 @@ public class Principal extends Activity {
         //estado.putString("TELEFONO", et.getText().toString());
 
         super.onSaveInstanceState(estado);
-        estado.putString("TELEFONO", estado.getString("TELEFONO"));
-        estado.putString("TEXTO", estado.getString("TEXTO"));
+        estado.putString("TELEFONO", tv_oculto_telefono.getText().toString());
+        estado.putString("TEXTO", tv_oculto_buscar.getText().toString());
         Toast.makeText(Principal.this, estado.getString("TELEFONO")+"saveinstance",Toast.LENGTH_SHORT).show();
 
         //Toast.makeText(this, "Gardado estado: "+et.getText(), Toast.LENGTH_SHORT).show();
@@ -155,8 +159,9 @@ public class Principal extends Activity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
-        String telefone = savedInstanceState.getString("TELEFONO");
-        Toast.makeText(Principal.this, telefone+"restoreinstace", Toast.LENGTH_SHORT).show();
+        //String telefone = savedInstanceState.getString("TELEFONO");
+        tv_oculto_buscar.setText(savedInstanceState.getString("TELEFONO"));
+        //Toast.makeText(Principal.this, telefone+"restoreinstace", Toast.LENGTH_SHORT).show();
 
 /*        savedInstanceState.putString("TELEFONO", savedInstanceState.getString("TELEFONO"));
         savedInstanceState.putString("TEXTO", savedInstanceState.getString("TEXTO"));*/
