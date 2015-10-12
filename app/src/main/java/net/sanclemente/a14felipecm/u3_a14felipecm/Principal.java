@@ -76,7 +76,7 @@ public class Principal extends Activity {
                 //Bundle estado = getIntent().getExtras();
                 //Inicializo el string que se va a buscar por defecto si el valor que hay guardado es nulo
                 String terminoBuscar= getResources().getString(R.string.string_default_busqueda);
-                if(tv_oculto_buscar !=null & tv_oculto_buscar.getText()!=""){
+                if(tv_oculto_buscar !=null & tv_oculto_buscar.getText().equals("")){
                     //Asigno el valor que hay en el textView oculto
                     terminoBuscar=tv_oculto_buscar.getText().toString();
                 }
@@ -90,7 +90,7 @@ public class Principal extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //Bundle estado = getIntent().getExtras();
-                if (tv_oculto_telefono.getText() != "" & tv_oculto_telefono!=null) {
+                if (tv_oculto_telefono.getText().equals("") & tv_oculto_telefono!=null) {
                     //Creamos el intent para la accion de abrir el dialogo de llamada
                     Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tv_oculto_telefono.getText().toString()));
                     startActivity(intent);
